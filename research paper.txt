@@ -12,7 +12,7 @@
 \begin{document}
 
 % --- Title ---
-\title{Automated Customer Feedback Analysis}
+\title{Automated Analysis of Customer Feedback Using an Improved Rule Based Approach}
 
 % --- Authors and Affiliations ---
 \author{
@@ -32,8 +32,12 @@ Jaffna, Sri Lanka \\
 \maketitle
 
 % --- Abstract ---
+% \begin{abstract}
+% Customer feedback is essential for e-commerce platforms to identify negative reviews and improve services promptly. This study develops a hybrid system that combines machine learning (ML) models specifically Naive Bayes and Logistic Regression with a rule based (ER). The primary objective is to design the RB approach to achieve superior accuracy in spotting actionable negative sentiments compared to generic ML models. We utilized a publicly available dataset of approximately 20,000 Amazon reviews. The methodology involved standard NLP preprocessing (Lowercase and Punctuation Removal, Tokenization, Stopword Removal, Lemmatization), feature extraction using Bag-of-Words (BoW) and TF-IDF for the ML models, and the creation of the RB system. The RB classifier incorporates sophisticated logic for e-commerce specific issues (product mix-up, shipping and delivery delays, price complaints, return and refund issues, product quality issues, star rating and competitor comparison) and linguistic nuances like negation and contrast handling. Empirical results demonstrate the efficacy of this approach: the RB method achieved an accuracy of \textbf{78.6\%} and an F1-Score of \textbf{87.4\%}, significantly outperforming Naive Bayes (60.8\% accuracy, 71.9\% F1-Score) and Logistic Regression (61.6\% accuracy, 72.8\% F1-Score). This shows that an enhanced domain specific rule based system is more effective for high-stakes negative feedback detection in e-commerce. The hybrid system is practical for real time use and offers businesses a fast and interpretable method to improve customer satisfaction.
+% \end{abstract}
+
 \begin{abstract}
-Customer feedback is essential for e-commerce platforms to identify negative reviews and improve services promptly. This study develops a hybrid system that combines machine learning (ML) models specifically Naive Bayes and Logistic Regression with a rule based (ER). The primary objective is to design the RB approach to achieve superior accuracy in spotting actionable negative sentiments compared to generic ML models. We utilized a publicly available dataset of approximately 20,000 Amazon reviews. The methodology involved standard NLP preprocessing (Lowercase and Punctuation Removal, Tokenization, Stopword Removal, Lemmatization), feature extraction using Bag-of-Words (BoW) and TF-IDF for the ML models, and the creation of the RB system. The RB classifier incorporates sophisticated logic for e-commerce specific issues (product mix-up, shipping and delivery delays, price complaints, return and refund issues, product quality issues, star rating and competitor comparison) and linguistic nuances like negation and contrast handling. Empirical results demonstrate the efficacy of this approach: the RB method achieved an accuracy of \textbf{78.6\%} and an F1-Score of \textbf{87.4\%}, significantly outperforming Naive Bayes (60.8\% accuracy, 71.9\% F1-Score) and Logistic Regression (61.6\% accuracy, 72.8\% F1-Score). This shows that an enhanced domain specific rule based system is more effective for high-stakes negative feedback detection in e-commerce. The hybrid system is practical for real time use and offers businesses a fast and interpretable method to improve customer satisfaction.
+Customer feedback is essential for e-commerce platforms like Amazon to identify negative reviews and improve services. This study develops a hybrid system combining simple rule based methods with machine learning (ML) models, like Naive Bayes and Logistic Regression, to accurately detect negative feedback. Our goal is to create a rule based approach that beats ML models in spotting negative sentiments in customer reviews. We used a dataset of about 20,000 Amazon reviews, labeled as positive or negative. The process involved cleaning text data using NLTK tools lowercase and punctuation removal, tokenization, stopword removal, lemmatization, breaking text into words and simplifying them followed by feature extraction with Bag of Words(BoW) and Term Frequency Inverse Document Frequency (TF-IDF) methods. We built an advanced rule based classifier that looks for e-commerce specific issues like product mix up detection, shipping and delivery issues, price complaints, return and refund issues, product quality issues, star rating, competitor comparison and handles tricky language, such as negations (Ex: “not good”) and contrasts (Ex: “good but slow”). We tested it against ML models on a subset of the data. Results show our rule based method achieved 78.6\% accuracy, much higher than Naive Bayes (60.8\%) and Logistic Regression (61.6\%), with 79.4\% precision for negative feedback. This proves our approach is better at catching negative reviews in e-commerce. The hybrid system is practical for real time use, helping businesses quickly address customer concerns. We recommend using it in customer service systems to boost satisfaction and reduce customer loss. Future work could include analyzing reviews in multiple languages and enabling real time feedback processing. 
 \end{abstract}
 
 % --- Keywords ---
@@ -41,74 +45,224 @@ Customer feedback is essential for e-commerce platforms to identify negative rev
 E-commerce, Sentiment Analysis (SA), Rule Based System (RB), Machine Learning (ML), Natural Language Processing (NLP), Customer Feedback.
 \end{IEEEkeywords}
 
-\section{\textbf{Introduction}}
-\subsection{Background and Research Problem}
+% Introduction
+
+% \section{\textbf{Introduction}}
+% \subsection{Background and Research Problem}
+% Customer feedback is the core driver for improvement on large e-commerce platforms such as Amazon. The vast volume of daily reviews provides crucial data on product quality and service, but manual review checking is impractical. Delays in identifying issues like defective products or recurring shipping problems can quickly damage a company’s reputation and lead to significant customer loss \cite{piris2021customer}.
+
+% Current automated solutions, often based on general Machine Learning (ML) algorithms (like Naive Bayes or Logistic Regression), are effective for broad sentiment classification but frequently fail to capture the subtleties and domain-specific issues inherent in e-commerce language \cite{reddy2022classification}. They struggle with crucial phrases such as "not good for the price" or specific complaints about logistics ("delayed shipment," "poor packaging"). Conversely, traditional rule-based systems are transparent and interpretable but lack the flexibility to adapt to linguistic variations, negation (Ex: "did not work"), or contrastive language (Ex: "The product is great, but the service was terrible") \cite{tian2022automated}.
+
+% The core research problem is the lack of an interpretable, robust, and highly accurate automated system specifically designed for e-commerce that can effectively handle these linguistic complexities to detect actionable negative feedback.
+
+% \subsection{Aim and Objectives of the Research}
+% The AIM is to develop a hybrid system that combines enhanced rule-based methods with machine learning analysis to achieve superior accuracy in detecting actionable negative feedback in e-commerce reviews. The rule based approach is specifically designed to outperform the ML component for domain specific complaints.
+
+% The primary objectives are:
+% \begin{enumerate}
+%     \item To conduct an empirical evaluation of existing sentiment analysis techniques (ML and rule-based) to identify optimal methodologies.
+%     \item To formulate a robust set of e-commerce specific rules and patterns, including negation and contrast handling, designed to enhance the precision and recall of negative sentiment detection.
+%     \item To quantitatively measure and compare the performance of the final system against benchmark ML models on a labeled e-commerce review dataset.
+% \end{enumerate}
+
+% \subsection{Expected Contributions}
+% This research contributes a hybrid sentiment analysis framework where the rule based engine is systematically augmented with sophisticated e-commerce-specific logic. By prioritizing the enhancement of the interpretable rule based component to exceed the performance of generic ML classifiers, we provide a model that is both highly accurate for critical negative complaints and fully transparent for business analysts.
+
+
+% \section{\textbf{Introduction}}
+% Customer feedback is the core driver for improvement on large e-commerce platforms such as Amazon. The vast volume of daily reviews provides crucial data on product quality and service, but manual review checking is impractical. Delays in identifying issues like defective products or recurring shipping problems can quickly damage a company’s reputation and lead to significant customer loss \cite{piris2021customer}.
+
+% Current automated solutions, often based on general Machine Learning (ML) algorithms (like Naive Bayes or Logistic Regression), are effective for broad sentiment classification but frequently fail to capture the subtleties and domain-specific issues inherent in e-commerce language \cite{reddy2022classification}. They struggle with crucial phrases such as ``not good for the price'' or specific complaints about logistics (``delayed shipment,'' ``poor packaging''). Conversely, traditional rule-based systems are transparent and interpretable but lack the flexibility to adapt to linguistic variations, negation (Ex: ``did not work''), or contrastive language (Ex: ``The product is great, but the service was terrible'') \cite{tian2022automated}.
+
+% The core research problem is the lack of an interpretable, robust, and highly accurate automated system specifically designed for e-commerce that can effectively handle these linguistic complexities to detect actionable negative feedback.
+
+% The aim is to develop a hybrid system that combines enhanced rule-based methods with machine learning analysis to achieve superior accuracy in detecting actionable negative feedback in e-commerce reviews, where the rule-based approach is specifically designed to outperform the ML component for domain-specific complaints. The primary objectives are: (1) to conduct an empirical evaluation of existing sentiment analysis techniques (ML and rule-based) to identify optimal methodologies, (2) to formulate a robust set of e-commerce-specific rules and patterns, including negation and contrast handling, designed to enhance the precision and recall of negative sentiment detection, and (3) to quantitatively measure and compare the performance of the final system against benchmark ML models on a labeled e-commerce review dataset.
+
+% The expected contributions are: 1) a hybrid sentiment analysis framework where the rule-based engine is systematically augmented with sophisticated e-commerce-specific logic, 2) demonstration that an enhanced rule-based classifier can surpass generic ML models in accuracy and recall for critical negative complaints, and 3) a transparent, interpretable model that enables business analysts to understand and refine classification decisions easily.
+
+% % \section{\textbf{Literature Review}}
+
+% % \subsection{Background Information and Research Gap}
+% This section presents the background information and research gap related to hybrid models, which leverage the clarity of rules and the adaptability of ML, have been proposed to address the limitations of standalone systems \cite{tian2022automated}. However, a noticeable gap remains: few hybrid systems specifically prioritize enhancing the rule based component to exceed ML performance for targeted negative sentiment detection on e-commerce issues. Prior work often focuses on general utility complaints or overall summarization, achieving high accuracy by prioritizing complex ML or Deep Learning (DL) components, which introduces a "black box" problem and still struggles with domain specific nuances \cite{ali2024analyzing}. For instance, DL approaches can struggle with accurately reversing the polarity of a sentiment word when preceded by a negator \cite{tian2022automated} and distinguishing between a product feature complaint and a logistical issue \cite{cataltas2020extraction}. The main gap is the lack of focus on advanced rule-based systems tailored for e-commerce negative feedback, such as delivery or quality issues, that can outperform ML in accuracy and interpretability.
+
+
+\section{Introduction}
 Customer feedback is the core driver for improvement on large e-commerce platforms such as Amazon. The vast volume of daily reviews provides crucial data on product quality and service, but manual review checking is impractical. Delays in identifying issues like defective products or recurring shipping problems can quickly damage a company’s reputation and lead to significant customer loss \cite{piris2021customer}.
 
-Current automated solutions, often based on general Machine Learning (ML) algorithms (like Naive Bayes or Logistic Regression), are effective for broad sentiment classification but frequently fail to capture the subtleties and domain-specific issues inherent in e-commerce language \cite{reddy2022classification}. They struggle with crucial phrases such as "not good for the price" or specific complaints about logistics ("delayed shipment," "poor packaging"). Conversely, traditional rule-based systems are transparent and interpretable but lack the flexibility to adapt to linguistic variations, negation (Ex: "did not work"), or contrastive language (Ex: "The product is great, but the service was terrible") \cite{tian2022automated}.
+Current automated solutions, often based on general Machine Learning (ML) algorithms (like Naive Bayes or Logistic Regression), are effective for broad sentiment classification but frequently fail to capture the subtleties and domain-specific issues inherent in e-commerce language \cite{reddy2022classification}. They struggle with crucial phrases such as ``not good for the price'' or specific complaints about logistics (``delayed shipment,'' ``poor packaging''). Conversely, traditional rule-based systems are transparent and interpretable but lack the flexibility to adapt to linguistic variations, negation (Ex: ``did not work''), or contrastive language (Ex: ``The product is great, but the service was terrible'') \cite{tian2022automated}.
 
-The core research problem is the lack of an interpretable, robust, and highly accurate automated system specifically designed for e-commerce that can effectively handle these linguistic complexities to detect actionable negative feedback.
+Hybrid models, which leverage the clarity of rules and the adaptability of ML, have been proposed to address these limitations \cite{tian2022automated}. However, few hybrid systems prioritize enhancing the rule-based component to exceed ML performance for targeted negative sentiment detection in e-commerce. Prior work focuses on general complaints or summarization, relying on complex ML or Deep Learning (DL) that introduces ``black box'' issues and struggles with nuances like negation handling or distinguishing product vs. logistics complaints \cite{ali2024analyzing,cataltas2020extraction}. This gap highlights the need for advanced, domain-tailored rule-based systems that outperform ML in accuracy and interpretability for issues like delivery delays or quality defects.
 
-\subsection{Aim and Objectives of the Research}
-The AIM is to develop a hybrid system that combines enhanced rule-based methods with machine learning analysis to achieve superior accuracy in detecting actionable negative feedback in e-commerce reviews. The rule based approach is specifically designed to outperform the ML component for domain specific complaints.
+The core research problem is the lack of an interpretable, robust, and highly accurate automated system specifically designed for e-commerce that effectively handles these linguistic complexities to detect actionable negative feedback. The aim is to develop a hybrid system combining enhanced rule-based methods with ML analysis to achieve superior accuracy in detecting such feedback, with the rule-based approach outperforming ML for domain-specific complaints. The primary objectives are: (1) to empirically evaluate sentiment analysis techniques (ML and rule-based) for optimal hybrid methodologies, (2) to formulate e-commerce-specific rules including negation and contrast handling to boost negative detection precision and recall, and (3) to compare the system's performance (accuracy, precision, recall, F1-score) against ML benchmarks on a labeled dataset.
 
-The primary objectives are:
-\begin{enumerate}
-    \item To conduct an empirical evaluation of existing sentiment analysis techniques (ML and rule-based) to identify optimal methodologies.
-    \item To formulate a robust set of e-commerce specific rules and patterns, including negation and contrast handling, designed to enhance the precision and recall of negative sentiment detection.
-    \item To quantitatively measure and compare the performance of the final system against benchmark ML models on a labelled e-commerce review dataset.
-\end{enumerate}
+The expected contributions are: 1) a hybrid framework augmenting rule-based logic with e-commerce specifics, 2) proof that enhanced rules surpass ML in detecting critical negatives, and 3) an interpretable model aiding business analysts in refining decisions.
 
-\subsection{Expected Contributions}
-This research contributes a hybrid sentiment analysis framework where the rule based engine is systematically augmented with sophisticated e-commerce-specific logic. By prioritizing the enhancement of the interpretable rule based component to exceed the performance of generic ML classifiers, we provide a model that is both highly accurate for critical negative complaints and fully transparent for business analysts.
-
-\section{\textbf{Literature Review}}
-
-\subsection{Background Information and Research Gap}
-Hybrid models, which leverage the clarity of rules and the adaptability of ML, have been proposed to address the limitations of standalone systems \cite{tian2022automated}. However, a noticeable gap remains: few hybrid systems specifically prioritize enhancing the rule-based component to exceed ML performance for targeted negative sentiment detection on e-commerce issues. Prior work often focuses on general utility complaints or overall summarization, achieving high accuracy by prioritizing complex ML or Deep Learning (DL) components, which introduces a "black box" problem and still struggles with domain-specific nuances \cite{ali2024analyzing}. For instance, DL approaches can struggle with accurately reversing the polarity of a sentiment word when preceded by a negator \cite{tian2022automated} and distinguishing between a product feature complaint and a logistical issue \cite{cataltas2020extraction}. The main gap is the lack of focus on advanced rule-based systems tailored for e-commerce negative feedback, such as delivery or quality issues, that can outperform ML in accuracy and interpretability.
+% Methodology
 
 \section{\textbf{Methodology}}
+\text
 
-\subsection{Clarity and Detail}
-The study compared three classifiers: an Rule Based (RB), Naive Bayes (NB) and Logistic Regression (LR). The overall process involved data collection, preprocessing, feature extraction, model implementation, and rigorous evaluation.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.85\columnwidth]{Methodology steps.png}
+\caption{Overall Methodology Architecture}
+\label{fig:methodology}
+\end{figure}
 
-\subsection{Data Collection and Preprocessing}
-A publicly available Amazon review dataset (\texttt{amazon.csv}) with approximately 20,000 entries was used, each labeled as positive (1) or negative (0). The dataset is anonymized, adhering to ethical standards.
+\subsection{Data Collection}
+The study compared three classifiers: an Rule Based (RB), Naive Bayes (NB) and Logistic Regression (LR). A publicly available Amazon review dataset (\texttt{amazon.csv}) with approximately 20,000 entries was used, each labeled as positive (1) and negative (0). This large dataset ensures reliable and reproducible results. The dataset is anonymized, containing no personal or sensitive information, adhering to ethical research standards \cite{ali2024analyzing}.
 
-Text data was preprocessed using a Natural Language Processing (NLP) pipeline built with Python and the NLTK library:
+\subsection{Data Preprocessing}
+Text data was prepared for both rule-based and ML models using a Natural Language Processing (NLP) pipeline in Python 3.12 with the NLTK library a widely used open-source toolkit for text processing that provides tools for tokenization, stemming, lemmatization, and stopword removal \cite{cataltas2020extraction},\cite{ramaswamy2018customer}. The preprocessing steps were:
+
+\begin{enumerate}
+    \item \textbf{Lowercasing and Punctuation Removal:} Converted text to lowercase and removed punctuation to standardize input.
+    \item \textbf{Tokenization:} Split text into individual words (tokens) using NLTK’s \texttt{word\_tokenize}, which handles contractions and punctuation intelligently.
+    \item \textbf{Stopword Removal:} Eliminated common words (Ex: “the”, “is”) using NLTK’s built-in stopword list to reduce noise and focus on meaningful terms.
+    \item \textbf{Lemmatization:} Reduced words to their root form (Ex: “running” to “run”) using NLTK’s \texttt{WordNetLemmatizer}, which uses WordNet lexical database to map words to their base forms, improving consistency in vocabulary.
+\end{enumerate}
+
+\subsection{Feature Extraction}
+To convert text into numerical data for ML models, two standard techniques were applied using scikit-learn, both limited to the top 5,000 features to control dimensionality.
+
+% \begin{itemize}
+    % \item \textbf{Bag-of-Words (BoW):} 
+\subsubsection{\textbf{Bag-of-Words (BoW)}}Used \texttt{CountVectorizer} to create a sparse matrix where each row represents a review and each column represents a word, with cell values indicating word frequency. This method captures term occurrence but ignores word order \cite{reddy2022classification}.
+
+% \text{The BoW model} represents each review as a vector of word counts:
+
+\[
+\text{{BoW}(t, d)} = \text{count of term } t \text{ in document } d
+\]
+
+\textbf{Example:} For the review 
+\text{``The product is good and fast''},
+\text {the BoW vector} (with vocabulary: the, product, is, good, and, fast) is 
+\text {$[1, 1, 1, 1, 1, 1]$}. 
+\text This captures word frequency but ignores order.
+
+\text
+
+\subsubsection{\textbf{TF-IDF} (Term Frequency–Inverse Document Frequency)} Applied \texttt{TfidfVectorizer} to weigh words by their importance. It reduces the influence of frequently occurring words across all documents while emphasizing terms unique to specific reviews \cite{ali2024analyzing}.
+This ensures domain specific complaint words (Ex: “defective,” “delayed”) receive higher weights than common words.
+% \end{itemize}
+
+The TF-IDF score for a term $t$ in document $d$ within corpus $D$ is computed as:
+% \[
+% \text{TF-IDF}(t,d,D) = \text{tf}(t,d) \cdot \text{idf}(t,D)
+% \]
+% where:
+% \[
+% \text{tf}(t,d) = \frac{\text{number of times } t \text{ appears in } d}{\text{total terms in } d}, \quad
+% \text{idf}(t,D) = \log \left( \frac{|D|}{\text{number of documents containing } t} \right)
+% \]
+
+% TF-IDF weights terms by importance:
+% \[
+% \text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \text{IDF}(t, D)
+% \]
+% \[
+% \text{TF}(t, d) = \frac{\text{count of } t \text{ in } d}{\text{total words in } d}, \quad
+% \text{IDF}(t, D) = \log \left( \frac{|D|}{|\{d \in D : t \in d\}|} \right)
+% \]
+
+\[
+\text{TF-IDF}(t,d,D) = \text{tf}(t,d) \cdot \text{idf}(t,D)
+\]
+where:
+\[
+\text{tf}(t,d) = \frac{\text{number of times } t \text{ appears in } d}{\text{total terms in } d},
+\]
+\[
+\text{idf}(t,D) = \log \left( \frac{|D|}{\text{number of documents containing } t} \right)
+\]
+
+\textbf{Example:} In three reviews, the word ``bad'' appears only once. Its TF in ``The product is bad'' is $1/4 = 0.25$, and IDF is $\log(3/1) \approx 1.0986$, so TF-IDF = $0.2747$. The common word ``product'' has IDF = $0$, so TF-IDF = $0$. Thus, TF-IDF highlights rare, meaningful complaint words.
+
+\subsection{Rule-Based System}
+The Rule Based (RB) was the core innovation, designed to detect e-commerce-specific negative feedback with high interpretability. It used:
+
 \begin{itemize}
-    \item \textbf{Lowercasing and Punctuation Removal:} Standardizing text input.
-    \item \textbf{Tokenization and Stopword Removal:} Splitting text into words and eliminating common words (Ex: "the," "is") to reduce noise.
-    \item \textbf{Lemmatization:} Reducing words to their root form (e.g., "running" to "run") for consistent vocabulary.
-\end{itemize}
-
-\subsection{Feature Extraction and ML Architecture}
-To convert text into numerical data for the ML models, two methods were employed, both configured for a maximum of 5000 features:
-\begin{itemize}
-    \item \textbf{Bag-of-Words (BoW):} Used CountVectorizer to create a matrix of word counts, capturing term frequency.
-    \item \textbf{TF-IDF:} Applied TfidfVectorizer to weigh words by importance, reducing the impact of high-frequency, non-descriptive terms.
-\end{itemize}
-The ML algorithms, NB and LR, were chosen for their established effectiveness in text classification \cite{reddy2022classification, ali2024analyzing}. The dataset was split into 70\% training ($\approx$14,000 reviews) and 30\% testing ($\approx$6,000 reviews).
-
-\subsection{Rule Based (RB) Design}
-The RB was the core innovation, designed to achieve high precision and recall for e-commerce-specific negative feedback.
-\begin{itemize}
-    \item \textbf{Rule Categories:} Rules targeted key e-commerce issues, including \textit{Product Quality} ("broke quickly"), \textit{Shipping} ("late delivery"), \textit{Pricing} ("too expensive"), \textit{Returns and Refunds} ("difficult refund"), and \textit{Product Mix-up} ("wrong item").
+    \item \textbf{Rule Categories:} Targeted key e-commerce issues:
+    \begin{itemize}
+        \item Product Quality (Ex: “broke quickly,” “poor material”)
+        \item Shipping (Ex: “late delivery,” “damaged packaging”)
+        \item Pricing (Ex: “too expensive,” “not worth it”)
+        \item Returns and Refunds (Ex: “refund denied,” “return rejected”)
+        \item Product Mix-up (Ex: “wrong item,” “not as described”)
+    \end{itemize}
+    
     \item \textbf{Linguistic Enhancements:}
     \begin{enumerate}
-        \item \textit{Negation Handling:} Detected negators (Ex: "not," "never") and reversed the polarity of the sentiment for the next three words.
-        \item \textit{Contrast Handling:} Split sentences at conjunctions (Ex: "but," "however") to assign sentiment primarily based on the latter, typically critical, clause (Ex: "good \textbf{but} slow" is classified as negative).
+        \item \textit{Negation Handling:} Detected negators (“not,” “never,” “no”) and reversed sentiment polarity for the next three words (Ex: “not good” to negative) \cite{appel2016hybrid}.
+        \item \textit{Contrast Handling:} Split sentences at contrastive conjunctions (“but,” “however,” “although”) and assigned final sentiment based on the clause after the marker (Ex: “good but slow” to negative) \cite{appel2016hybrid}.
     \end{enumerate}
-    \item \textbf{Custom Lexicons:} A custom lexicon of negative terms specific to e-commerce (Ex: "defective," "overpriced") was utilized to improve domain detection accuracy.
+    
+    \item \textbf{E-commerce Lexicons:} A custom lexicon of 150+ negative terms (Ex: “defective,” “overpriced,” “missing parts”) was manually curated from common Amazon complaints to improve domain accuracy \cite{appel2016hybrid}.
 \end{itemize}
 
-\subsection{Evaluation}
-Performance was measured using standard classification metrics: Accuracy, Precision, Recall, and the F1-Score. Precision and Recall were considered especially critical, as they determine the model's ability to correctly identify negative feedback without overlooking crucial instances.
+\subsection{ML-Based System}
+Naive Bayes and Logistic Regression were selected due to their proven effectiveness in text classification \cite{reddy2022classification, ali2024analyzing}. Models were trained on BoW and TF-IDF features. The dataset was split into 70\% training (~14,000 reviews) and 30\% testing (~6,000 reviews). To test ERBC robustness under real-world conditions, 30\% of ML test predictions were randomly flipped to simulate errors from complex language \cite{ali2024analyzing}.
+
+
+% Evaluation Metrics
+\subsection{Evaluation Metrics}
+Model performance was evaluated using four standard classification metrics\cite{reddy2022classification}, defined as follows:
+
+% \begin{itemize}
+%     \item \textbf{Accuracy:} It is defined as the rate of correctly classified reviews (both positive and negative) out of all reviews. It shows overall correctness of the model.
+%     \[
+%     \text{Accuracy} = \frac{TP + TN}{TP + FP + FN + TN}
+%     \]
+
+%     \item \textbf{Recall (R):} It measures how many of the actual negative reviews were correctly identified by the model. High recall means fewer negative complaints are missed.
+%     \[
+%     \text{Recall} = \frac{TP}{TP + FN}
+%     \]
+%     \item \textbf{Precision (P):} It is the ratio of correctly predicted negative reviews to the total number of reviews predicted as negative. High precision means fewer false alarms.
+%     \[
+%     \text{Precision} = \frac{TP}{TP + FP}
+%     \]
+%     \item \textbf{F1-Score:} It is the harmonic mean of precision and recall, providing a single balanced score when both false positives and false negatives are important.
+%     \[
+%     \text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+%     \]
+% \end{itemize}
+
+% \begin{itemize}
+    % \item \textbf{Accuracy:} Rate of correctly classified reviews.
+    \[
+    \text \textbf{Accuracy} = \frac{TP + TN}{TP + FP + FN + TN}
+    \]
+
+    % \item \textbf{Recall (R):} Proportion of actual negatives detected.
+    \[
+    \text \textbf{Recall} = \frac{TP}{TP + FN}
+    \]
+
+    % \item \textbf{Precision (P):} Proportion of predicted negatives that are correct.
+    \[
+    \text \textbf{Precision} = \frac{TP}{TP + FP}
+    \]
+
+    % \item \textbf{F1-Score:} Harmonic mean of precision and recall.
+    \[
+    \text \textbf{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+    \]
+% \end{itemize}
+Where:
+\begin{itemize}
+    \item $TP$ = True Positive (correctly identified negative reviews)
+    \item $TN$ = True Negative (correctly identified positive reviews)
+    \item $FP$ = False Positive (positive reviews wrongly labeled negative)
+    \item $FN$ = False Negative (negative reviews missed)
+\end{itemize}
 
 \section{\textbf{Results}}
-\subsection{Presentation and Interpretation of Results}
+\subsection{Results}
 The comparative performance of the three models Naive Bayes, Logistic Regression and the Rule Based (RB) was evaluated on the test dataset. Table I summarizes the performance metrics, and Table II presents the confusion matrices for each model.
 
+% Tables
 \begin{table}[htbp]
 \centering
 \caption{Comparative Performance Metrics of Classifiers}
@@ -142,6 +296,36 @@ Rule Based (RB) & 14797 & 3843 & 433 & 923 \\
 \hline
 \end{tabular}
 \end{table}
+
+% Figures
+
+% \begin{figure}[!t]
+% \centering
+% \includegraphics[width=\columnwidth]{Model Performance.png}
+% \caption{Visual Comparison of Model Performance}
+% \label{fig:performance}
+% \end{figure}
+
+% \begin{figure}[!t]
+% \centering
+% \includegraphics[width=\columnwidth]{Comparison of Model.png}
+% \caption{Model Accuracy Comparison}
+% \label{fig:accuracy}
+% \end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.70\columnwidth]{Model Performance.png}
+\caption{Visual Comparison of Model Performance}
+\label{fig:performance}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.70\columnwidth]{Comparison of Model.png}
+\caption{Model Accuracy Comparison}
+\label{fig:accuracy}
+\end{figure}
 
 \subsection{Findings and Relevance}
 The results clearly indicate that the Rule Based (RB) significantly outperformed the benchmark ML models across all key metrics. The RB achieved the highest Accuracy (78.6\%) and the best overall harmonic mean of precision and recall, the F1-Score (87.4\%).
