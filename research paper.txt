@@ -12,22 +12,45 @@
 \begin{document}
 
 % --- Title ---
-\title{Automated Analysis of Customer Feedback Using an Improved Rule Based Approach}
+\title{Automated Customer Feedback Analysis Using an Improved Rule Based Approach}
 
 % --- Authors and Affiliations ---
-\author{
-\IEEEauthorblockN{Fahith K.R.M.}
+% \author{
+% \IEEEauthorblockN{Fahith K.R.M.}
+% \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
+% \textit{Faculty of Engineering, University of Jaffna}\\
+% Jaffna, Sri Lanka \\
+% 2020e041@eng.jfn.ac.lk}
+% \and
+% \IEEEauthorblockN{Uzair U.M.}
+% \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
+% \textit{Faculty of Engineering, University of Jaffna}\\
+% Jaffna, Sri Lanka \\
+% 2020e201@eng.jfn.ac.lk}
+% }
+
+\author
+{\IEEEauthorblockN{Fahith K.R.M.}
 \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
-\textit{Faculty of Engineering, University of Jaffna}\\
+\textit{Faculty of Engineering},\\ {University of Jaffna}\\
 Jaffna, Sri Lanka \\
 2020e041@eng.jfn.ac.lk}
 \and
 \IEEEauthorblockN{Uzair U.M.}
 \IEEEauthorblockA{\textit{Department of Computer Engineering} \\
-\textit{Faculty of Engineering, University of Jaffna}\\
+\textit{Faculty of Engineering},\\ {University of Jaffna}\\
 Jaffna, Sri Lanka \\
 2020e201@eng.jfn.ac.lk}
+\and
+\IEEEauthorblockN{Dr. (Mrs.) J. Jananie}
+\IEEEauthorblockA{\textit{Senior Lecturer Grade II} \\
+\textit{Department of Computer Engineering} \\
+\textit{Faculty of Engineering},\\ {University of Jaffna}\\
+Jaffna, Sri Lanka \\
+jananie@eng.jfn.ac.lk}
+
 }
+
 
 \maketitle
 
@@ -91,7 +114,7 @@ Customer feedback is the core driver for improvement on large e-commerce platfor
 
 Current automated solutions, often based on general Machine Learning (ML) algorithms (like Naive Bayes or Logistic Regression), are effective for broad sentiment classification but frequently fail to capture the subtleties and domain-specific issues inherent in e-commerce language \cite{reddy2022classification}. They struggle with crucial phrases such as ``not good for the price'' or specific complaints about logistics (``delayed shipment,'' ``poor packaging''). Conversely, traditional rule-based systems are transparent and interpretable but lack the flexibility to adapt to linguistic variations, negation (Ex: ``did not work''), or contrastive language (Ex: ``The product is great, but the service was terrible'') \cite{tian2022automated}.
 
-Hybrid models, which leverage the clarity of rules and the adaptability of ML, have been proposed to address these limitations \cite{tian2022automated}. However, few hybrid systems prioritize enhancing the rule-based component to exceed ML performance for targeted negative sentiment detection in e-commerce. Prior work focuses on general complaints or summarization, relying on complex ML or Deep Learning (DL) that introduces ``black box'' issues and struggles with nuances like negation handling or distinguishing product vs. logistics complaints \cite{ali2024analyzing,cataltas2020extraction}. This gap highlights the need for advanced, domain-tailored rule-based systems that outperform ML in accuracy and interpretability for issues like delivery delays or quality defects.
+Hybrid models, which leverage the clarity of rules and the adaptability of ML, have been proposed to address these limitations \cite{tian2022automated}. However, few hybrid systems prioritize enhancing the rule-based component to exceed ML performance for targeted negative sentiment detection in e-commerce. Prior work focuses on general complaints or summarization, relying on complex ML or Deep Learning (DL) that introduces issues and struggles with nuances like negation handling or distinguishing product vs. logistics complaints \cite{ali2024analyzing,cataltas2020extraction}. This gap highlights the need for advanced, domain-tailored rule-based systems that outperform ML in accuracy and interpretability for issues like delivery delays or quality defects.
 
 The core research problem is the lack of an interpretable, robust, and highly accurate automated system specifically designed for e-commerce that effectively handles these linguistic complexities to detect actionable negative feedback. The aim is to develop a hybrid system combining enhanced rule-based methods with ML analysis to achieve superior accuracy in detecting such feedback, with the rule-based approach outperforming ML for domain-specific complaints. The primary objectives are: (1) to empirically evaluate sentiment analysis techniques (ML and rule-based) for optimal hybrid methodologies, (2) to formulate e-commerce-specific rules including negation and contrast handling to boost negative detection precision and recall, and (3) to compare the system's performance (accuracy, precision, recall, F1-score) against ML benchmarks on a labeled dataset.
 
@@ -230,26 +253,39 @@ Model performance was evaluated using four standard classification metrics\cite{
 % \end{itemize}
 
 % \begin{itemize}
-    % \item \textbf{Accuracy:} Rate of correctly classified reviews.
-    \[
-    \text \textbf{Accuracy} = \frac{TP + TN}{TP + FP + FN + TN}
-    \]
+    %\item \textbf{Accuracy:} Rate of correctly classified reviews.
+    % \[
+    % \text \textbf{Accuracy} = \frac{TP + TN}{TP + FP + FN + TN}
+    % \]
 
-    % \item \textbf{Recall (R):} Proportion of actual negatives detected.
-    \[
-    \text \textbf{Recall} = \frac{TP}{TP + FN}
-    \]
+    % % \item \textbf{Recall (R):} Proportion of actual negatives detected.
+    % \[
+    % \text \textbf{Recall} = \frac{TP}{TP + FN}
+    % \]
 
-    % \item \textbf{Precision (P):} Proportion of predicted negatives that are correct.
-    \[
-    \text \textbf{Precision} = \frac{TP}{TP + FP}
-    \]
+    % % \item \textbf{Precision (P):} Proportion of predicted negatives that are correct.
+    % \[
+    % \text \textbf{Precision} = \frac{TP}{TP + FP}
+    % \]
 
-    % \item \textbf{F1-Score:} Harmonic mean of precision and recall.
-    \[
-    \text \textbf{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-    \]
+    % % \item \textbf{F1-Score:} Harmonic mean of precision and recall.
+    % \[
+    % \text \textbf{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+    % \]
 % \end{itemize}
+
+\[
+\text \textbf{Accuracy} = \frac{TP + TN}{TP + FP + FN + TN}
+\]
+\[
+\text \textbf{Recall} = \frac{TP}{TP + FN}
+\]
+\[
+\text \textbf{Precision} = \frac{TP}{TP + FP}
+\]
+\[
+\text \textbf{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\]
 Where:
 \begin{itemize}
     \item $TP$ = True Positive (correctly identified negative reviews)
@@ -336,8 +372,8 @@ In contrast, the ML models showed comparable Precision but substantially lower R
 
 \section{\textbf{Discussion}}
 
-\subsection{Interpretation of Results and Contextualization}
-The superior performance of the RB, particularly its exceptionally high Recall, confirms the value of deeply embedding domain specific knowledge into a sentiment analysis system. The linguistic enhancements for negation and contrast, combined with a custom lexicon for e-commerce complaints (Ex: shipping, quality, returns), allowed the RB to accurately interpret complex, negative language where the generic ML models failed. While NB and LR are generally effective for broad sentiment, their "black box" nature and reliance on general patterns make them less adept at the high stakes task of identifying actionable e-commerce-specific complaints. The RB provides not only higher accuracy but also interpretability, as the classification can be directly traced back to the triggering rule.
+\subsection{Implications of Results}
+The superior performance of the RB, particularly its exceptionally high Recall, confirms the value of deeply embedding domain specific knowledge into a sentiment analysis system. The linguistic enhancements for negation and contrast, combined with a custom lexicon for e-commerce complaints (Ex: shipping, quality, returns), allowed the RB to accurately interpret complex, negative language where the generic ML models failed. While NB and LR are generally effective for broad sentiment, their nature and reliance on general patterns make them less adept at the high stakes task of identifying actionable e-commerce-specific complaints. The RB provides not only higher accuracy but also interpretability, as the classification can be directly traced back to the triggering rule.
 
 \subsection{Limitations and Future Directions}
 A primary limitation is that the RB's high performance is specific to the English language and the e-commerce domain. Developing rules for other domains or languages would require extensive, manual rule engineering. Furthermore, while the rule set is robust, it cannot adapt dynamically to completely new slang or product categories without human intervention, which an adaptive ML system could potentially do.
@@ -346,10 +382,9 @@ Future work should focus on integrating this high recall RB as the first pass fi
 
 \section{\textbf{Conclusion}}
 
-\subsection{Summary of Key Findings}
+\subsection{Summary}
 This research successfully developed an Rule Based (RB) for automated customer feedback analysis in the e-commerce sector. The key finding is the dramatic performance advantage of the RB over benchmark Machine Learning models (Naive Bayes and Logistic Regression) in detecting critical negative sentiment. With an Accuracy of \textbf{78.6\%} and a Recall of \textbf{97.2\%}, the RB proves that a targeted, interpretable rule based approach, specifically engineered for e-commerce domain language and linguistic subtleties, is highly effective for high stakes sentiment detection.
 
-\subsection{Relevance and Recommendations}
 The superior performance confirms the relevance of this RB approach to the research question: it effectively addresses the lack of a robust, interpretable system capable of handling complex e-commerce feedback. We recommend that e-commerce businesses integrate this enhanced hybrid approach into their customer service systems. Implementing this RB as a pre filter can help businesses to quickly address customer concerns, significantly boost customer satisfaction, and ultimately reduce customer loss by immediately acting upon the most critical, high-recall negative reviews identified.
 
 % --- References ---
